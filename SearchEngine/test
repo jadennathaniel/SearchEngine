@@ -1,0 +1,34 @@
+void Index::readPerson(unordered_map<string, shared_ptr<Doc>> &peopleMap)
+{
+    ifstream input;
+    input.open("people.csv");
+    if (!input.is_open())
+    {
+        cout << "Could not open file" << endl;
+        return;
+    }
+    string name, id, title, author, published, text, line;
+    getline(input, name);
+    while (!input.eof()) // reading info from file to add to tree
+    {
+        peopleMap[name];
+        getline(input, id);
+        do
+        {
+            getline(input, title);
+            getline(input, author);
+            getline(input, published);
+            getline(input, line);
+            do
+            {
+                line.append("\n");
+                text.append(line);
+                getline(input, line);
+            } while (line != "END OF TEXT");
+            shared_ptr<Doc> d(new Doc(title, id, published, author, text));
+            peopleMap[name] = d;
+            getline(input, id);
+        } while (id != "NEXT PERSON");
+        getline(input, name);
+    }
+}
